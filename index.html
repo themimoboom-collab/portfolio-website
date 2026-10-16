@@ -529,7 +529,7 @@
     renderFilmWall();
 
     (() => {
-      const frameCount = 192;
+      const frameCount = 302;
       const canvas = document.querySelector('#hero-canvas');
       const ctx = canvas.getContext('2d', { alpha: false });
       const frames = new Array(frameCount);
@@ -576,11 +576,11 @@
       resizeCanvas();
       addEventListener('resize', resizeCanvas, { passive: true });
       addEventListener('scroll', measureScroll, { passive: true });
-      // The provided frame sequence is numbered consecutively from frame_000001.webp to frame_000192.webp.
+      // The 30 fps sequence is numbered consecutively from frame_00001.webp to frame_00302.webp.
       Promise.all(Array.from({ length: frameCount }, (_, index) => new Promise(resolve => {
         const image = new Image(); frames[index] = image;
         image.onload = resolve; image.onerror = resolve;
-        image.src = `frames/frame_${String(index + 1).padStart(6, '0')}.webp`;
+        image.src = `frames-30fps/frame_${String(index + 1).padStart(5, '0')}.webp`;
       }))).then(() => { ready = true; drawFrame(); measureScroll(); });
 
       // Fade in content as it enters the viewport; keep it visible when motion is reduced.
